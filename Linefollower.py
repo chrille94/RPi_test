@@ -11,17 +11,19 @@ rMotorR = 2
 lMotorPWM = 17
 lMotorF = 27
 lMotorR = 22
-
 sensor = 18
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(rMotorPWM, GPIO.OUT)
-GPIO.setup(rMotorF, GPIO.OUT)
-GPIO.setup(rMotorR, GPIO.OUT)
-GPIO.setup(lMotorPWM, GPIO.OUT)
-GPIO.setup(lMotorF, GPIO.OUT)
-GPIO.setup(lMotorR, GPIO.OUT)
+gpio_outputs = (rMotorPWM, rMotorF, rMotorR, lMotorPWM, lMotorF, lMotorR)
+
+# GPIO.setup(rMotorPWM, GPIO.OUT)
+# GPIO.setup(rMotorF, GPIO.OUT)
+# GPIO.setup(rMotorR, GPIO.OUT)
+# GPIO.setup(lMotorPWM, GPIO.OUT)
+# GPIO.setup(lMotorF, GPIO.OUT)
+# GPIO.setup(lMotorR, GPIO.OUT)
+GPIO.setup(gpio_outputs, GPIO.OUT)
 GPIO.setup(sensor, GPIO.IN)
 rMotor = GPIO.PWM(rMotorPWM, 100)
 lMotor = GPIO.PWM(lMotorPWM, 100)
