@@ -37,7 +37,7 @@ def decideSpeed():
         direction = (100, 100)
     else:
         direction = (-100, 100)
-    print("Direction:", direction)
+    print(direction)
     runMotor(direction)
 
 def runMotor(values):
