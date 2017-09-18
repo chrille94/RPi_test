@@ -129,7 +129,7 @@ def runMotor(values):
 
 
 while 1:
-    getSensors()
+    decideSpeed()
     time.sleep(1)
     # options[linereading]()
     # if (linereading == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
