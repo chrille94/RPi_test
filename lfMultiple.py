@@ -59,6 +59,8 @@ def runMotor(values):
         rMotor.stop()
     else:
         rMotor.start(abs(values[1]))
+    print(abs(values[0]))
+    print(abs(values[1]))
 
     if(values[0] >= 0):
         GPIO.output(lMotorR, 0)
