@@ -75,18 +75,29 @@ def stop():
     lMotor.stop()
 
 
-options = {[0, 0, 0]: forward,  # All sensors see white
-           [1, 1, 1]: forward,  # All sensors see black
-           [0, 1, 0]: forward,  # Middle sensor black. Others: white
-           [0, 1, 1]: softRight,  # Left sensor: white. Others: black
-           [1, 1, 0]: softLeft,  # Right sensor: white. Others: black
-           [0, 0, 1]: hardRight,  # Right sensor: black. Others: white
-           [1, 0, 0]: hardLeft,  # Left sensor: black. Others: white
-           [1, 0, 1]: stop,  # Middle sensor white. Others: black
-           }
-
+# options = {[0, 0, 0]: forward,  # All sensors see white
+#            [1, 1, 1]: forward,  # All sensors see black
+#            [0, 1, 0]: forward,  # Middle sensor black. Others: white
+#            [0, 1, 1]: softRight,  # Left sensor: white. Others: black
+#            [1, 1, 0]: softLeft,  # Right sensor: white. Others: black
+#            [0, 0, 1]: hardRight,  # Right sensor: black. Others: white
+#            [1, 0, 0]: hardLeft,  # Left sensor: black. Others: white
+#            [1, 0, 1]: stop,  # Middle sensor white. Others: black
+#            }
 
 
 while 1:
     linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
-    options[linereading]()
+    # options[linereading]()
+    if (linereading == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
+        forward()
+    elif (linereading == [0, 1, 1]):        # Left sensor: white. Others: black
+        softRight()
+    elif (linereading == [1, 1, 0]):        # Right sensor: white. Others: black
+        softLeft()
+    elif (linereading == [0, 0, 1]):        # Right sensor: black. Others: white
+        hardRight()
+    elif (linereading == [1, 0, 0]):        # Left sensor: black. Others: white
+        hardLeft()
+    elif (linereading == [1, 0, 1]):        # Middle sensor white. Others: black
+        stop()
