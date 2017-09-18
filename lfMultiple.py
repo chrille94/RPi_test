@@ -94,7 +94,7 @@ def stop():
 
 while 1:
     getSensors()
-    time.leep(1)
+    time.sleep(1)
     # options[linereading]()
     # if (linereading == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
     #     forward()
