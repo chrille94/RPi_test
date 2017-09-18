@@ -37,7 +37,7 @@ def decideSpeed():
     if(sensorval == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
         direction = (100, 100)
     else:
-        direction = (-100, 100)
+        direction = (60, 100)
     print(direction)
     # runMotor(direction)
 
