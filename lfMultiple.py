@@ -26,6 +26,12 @@ GPIO.setup(gpio_inputs, GPIO.IN)
 rMotor = GPIO.PWM(rMotorPWM, 100)  # Right motor PWM init @ 100Hz
 lMotor = GPIO.PWM(lMotorPWM, 100)  # Left motor PWM init @ 100Hz
 
+def getSensors():
+    linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
+    print(linereading)
+    return linereading
+
+
 def forward():
     GPIO.output(rMotorR, 0)
     GPIO.output(lMotorR, 0)
@@ -87,17 +93,18 @@ def stop():
 
 
 while 1:
-    linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
+    getSensors()
+    time.leep(1)
     # options[linereading]()
-    if (linereading == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
-        forward()
-    elif (linereading == [0, 1, 1]):        # Left sensor: white. Others: black
-        softRight()
-    elif (linereading == [1, 1, 0]):        # Right sensor: white. Others: black
-        softLeft()
-    elif (linereading == [0, 0, 1]):        # Right sensor: black. Others: white
-        hardRight()
-    elif (linereading == [1, 0, 0]):        # Left sensor: black. Others: white
-        hardLeft()
-    elif (linereading == [1, 0, 1]):        # Middle sensor white. Others: black
-        stop()
+    # if (linereading == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
+    #     forward()
+    # elif (linereading == [0, 1, 1]):        # Left sensor: white. Others: black
+    #     softRight()
+    # elif (linereading == [1, 1, 0]):        # Right sensor: white. Others: black
+    #     softLeft()
+    # elif (linereading == [0, 0, 1])         # Right sensor: black. Others: white
+    #     hardRight()
+    # elif (linereading == [1, 0, 0]):        # Left sensor: black. Others: white
+    #     hardLeft()
+    # elif (linereading == [1, 0, 1]):        # Middle sensor white. Others: black
+    #     stop()
