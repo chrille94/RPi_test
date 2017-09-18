@@ -31,54 +31,90 @@ def getSensors():
     print(linereading)
     return linereading
 
+def decideSpeed():
+    sensorval = getSensors()
+    if(sensorval == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
+        direction = (100, 100)
+    else:
+        direction = (-100, 100)
+    print("Direction:", direction)
+    runMotor(direction)
 
-def forward():
-    GPIO.output(rMotorR, 0)
-    GPIO.output(lMotorR, 0)
-    GPIO.output(rMotorF, 1)
-    GPIO.output(lMotorF, 1)
-    rMotor.start(100)
-    lMotor.start(100)
+def runMotor(values):
+    if(values[0] == 0):
+        lMotor.stop()
+    else:
+        lMotor.start(abs(values[0]))
 
-def softRight():
-    GPIO.output(rMotorR, 0)
-    GPIO.output(lMotorR, 0)
-    GPIO.output(rMotorF, 1)
-    GPIO.output(lMotorF, 1)
-    rMotor.start(60)
-    lMotor.start(100)
+    if(values[1] == 0):
+        rMotor.stop()
+    else:
+        rMotor.start(abs(values[1]))
 
+    if(values[0] >= 0):
+        GPIO.output(lMotorR, 0)
+        GPIO.output(lMotorF, 1)
+    else:
+        GPIO.output(lMotorF, 0)
+        GPIO.output(lMotorR, 1)
 
-def softLeft():
-    GPIO.output(rMotorR, 0)
-    GPIO.output(lMotorR, 0)
-    GPIO.output(rMotorF, 1)
-    GPIO.output(lMotorF, 1)
-    rMotor.start(100)
-    lMotor.start(60)
-
-
-def hardRight():
-    GPIO.output(rMotorF, 0)
-    GPIO.output(lMotorR, 0)
-    GPIO.output(rMotorR, 1)
-    GPIO.output(lMotorF, 1)
-    rMotor.start(100)
-    lMotor.start(100)
-
-
-def hardLeft():
-    GPIO.output(rMotorR, 0)
-    GPIO.output(lMotorF, 0)
-    GPIO.output(rMotorF, 1)
-    GPIO.output(lMotorR, 1)
-    rMotor.start(100)
-    lMotor.start(100)
+    if(values[1] >= 0):
+        GPIO.output(rMotorR, 0)
+        GPIO.output(rMotorF, 1)
+    else:
+        GPIO.output(rMotorF, 0)
+        GPIO.output(rMotorR, 1)
 
 
-def stop():
-    rMotor.stop()
-    lMotor.stop()
+
+
+# def forward():
+#     GPIO.output(rMotorR, 0)
+#     GPIO.output(lMotorR, 0)
+#     GPIO.output(rMotorF, 1)
+#     GPIO.output(lMotorF, 1)
+#     rMotor.start(100)
+#     lMotor.start(100)
+#
+# def softRight():
+#     GPIO.output(rMotorR, 0)
+#     GPIO.output(lMotorR, 0)
+#     GPIO.output(rMotorF, 1)
+#     GPIO.output(lMotorF, 1)
+#     rMotor.start(60)
+#     lMotor.start(100)
+#
+#
+# def softLeft():
+#     GPIO.output(rMotorR, 0)
+#     GPIO.output(lMotorR, 0)
+#     GPIO.output(rMotorF, 1)
+#     GPIO.output(lMotorF, 1)
+#     rMotor.start(100)
+#     lMotor.start(60)
+#
+#
+# def hardRight():
+#     GPIO.output(rMotorF, 0)
+#     GPIO.output(lMotorR, 0)
+#     GPIO.output(rMotorR, 1)
+#     GPIO.output(lMotorF, 1)
+#     rMotor.start(100)
+#     lMotor.start(100)
+#
+#
+# def hardLeft():
+#     GPIO.output(rMotorR, 0)
+#     GPIO.output(lMotorF, 0)
+#     GPIO.output(rMotorF, 1)
+#     GPIO.output(lMotorR, 1)
+#     rMotor.start(100)
+#     lMotor.start(100)
+
+
+# def stop():
+#     rMotor.stop()
+#     lMotor.stop()
 
 
 # options = {[0, 0, 0]: forward,  # All sensors see white
