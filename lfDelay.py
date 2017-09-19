@@ -41,9 +41,9 @@ def decideSpeed():
     elif(sensorval == [0, 1, 1]):
         direction = (80, 40)
     elif(sensorval == [1, 0, 0]):
-        direction = (-70, 70)
+        direction = (0, 80)
     elif(sensorval == [0, 0, 1]):
-        direction = (70, -70)
+        direction = (80, 0)
     elif(sensorval == [1, 0, 1]):
         direction = (0, 0)
     elif(sensorval == [0, 0, 0]):
@@ -82,4 +82,3 @@ def runMotor(values):
 
 while 1:
     decideSpeed()
-    time.sleep(0.1)
