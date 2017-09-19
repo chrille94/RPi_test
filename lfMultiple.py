@@ -28,12 +28,12 @@ lMotor = GPIO.PWM(lMotorPWM, 100)  # Left motor PWM init @ 100Hz
 
 def getSensors():
     linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
-    print(linereading)
+    # print(linereading)
     return linereading
 
 def decideSpeed():
     sensorval = getSensors()
-    print(sensorval)
+    # print(sensorval)
     if(sensorval == [1, 1, 1]) or (sensorval == [0, 1, 0]):
         direction = (100, 100)
     elif(sensorval == [1, 1, 0]):
@@ -47,8 +47,8 @@ def decideSpeed():
     elif(sensorval == [1, 0, 1]):
         direction = (0, 0)
     elif(sensorval == [0, 0, 0]):
-        direction = (-40, -40)
-    print(direction)
+        direction = (-50, -50)
+    # print(direction)
     runMotor(direction)
 
 def runMotor(values):
@@ -61,8 +61,8 @@ def runMotor(values):
         rMotor.stop()
     else:
         rMotor.start(abs(values[1]))
-    print(abs(values[0]))
-    print(abs(values[1]))
+    # print(abs(values[0]))
+    # print(abs(values[1]))
 
     if(values[0] >= 0):
         GPIO.output(lMotorR, 0)
