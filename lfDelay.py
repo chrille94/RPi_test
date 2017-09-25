@@ -52,10 +52,10 @@ def getSensors():
     else:
         linereading[2] = 0
 
-    print(leftReadings.count(1))
-    print(middleReadings.count(1))
-    print(rightReadings.count(1))
-    print(linereading)
+    # print(leftReadings.count(1))
+    # print(middleReadings.count(1))
+    # print(rightReadings.count(1))
+    # print(linereading)
 
     return linereading
 
@@ -106,7 +106,8 @@ def runMotor(values):
         GPIO.output(rMotorF, 0)
         GPIO.output(rMotorR, 1)
 
-
+def cleanupGpio():
+    GPIO.cleanup()
 
 while 1:
     try:
