@@ -62,20 +62,10 @@ def getSensors():
 def decideSpeed():
     sensorval = getSensors()
     # print(sensorval)
-    if(sensorval == [1, 1, 1]) or (sensorval == [0, 1, 0]):
-        direction = (100, 100)
-    elif(sensorval == [1, 1, 0]):
+    if(sensorval[1] == 1):
         direction = (80, 100)
-    elif(sensorval == [0, 1, 1]):
+    else:
         direction = (100, 80)
-    elif(sensorval == [1, 0, 0]):
-        direction = (50, 100)
-    elif(sensorval == [0, 0, 1]):
-        direction = (100, 50)
-    elif(sensorval == [1, 0, 1]):
-        direction = (0, 0)
-    elif(sensorval == [0, 0, 0]):
-        direction = (-60, -60)
     # print(direction)
     runMotor(direction)
 
