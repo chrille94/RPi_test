@@ -27,8 +27,36 @@ rMotor = GPIO.PWM(rMotorPWM, 100)  # Right motor PWM init @ 100Hz
 lMotor = GPIO.PWM(lMotorPWM, 100)  # Left motor PWM init @ 100Hz
 
 def getSensors():
-    linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
+    leftReadings = []
+    middleReadings = []
+    rightReadings = []
+    linereading = []
+    for i in range(0, 30):
+        leftReadings[i] = GPIO.input(lSensor)
+        middleReadings[i] = GPIO.input(mSensor)
+        rightReadings[i] = GPIO.input(rSensor)
+    # linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
     # print(linereading)
+    if(leftReadings.count(1) > 6):
+        linereading[0] = 1
+    else:
+        linereading[0] = 0
+
+    if(middleReadings.count(1) > 6):
+        linereading[1] = 1
+    else:
+        linereading[1] = 0
+
+    if(rightReadings.count(1) > 6):
+        linereading[2] = 1
+    else:
+        linereading[2] = 0
+
+    print(leftReadings.count(1))
+    print(middleReadings.count(1))
+    print(rightReadings.count(1))
+    print(linereading)
+
     return linereading
 
 def decideSpeed():
@@ -81,4 +109,8 @@ def runMotor(values):
 
 
 while 1:
-    decideSpeed()
+    try:
+        decideSpeed()
+    except KeyboardInterrupt:
+        print "cleanup"
+        cleanupGpio()
