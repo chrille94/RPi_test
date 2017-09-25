@@ -23,31 +23,31 @@ gpio_inputs = (rSensor, mSensor, lSensor)
 
 GPIO.setup(gpio_outputs, GPIO.OUT)
 GPIO.setup(gpio_inputs, GPIO.IN)
-rMotor = GPIO.PWM(rMotorPWM, 100)  # Right motor PWM init @ 100Hz
-lMotor = GPIO.PWM(lMotorPWM, 100)  # Left motor PWM init @ 100Hz
+rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 100Hz
+lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 100Hz
 
 def getSensors():
-    leftReadings = [0]*30
-    middleReadings = [0]*30
-    rightReadings = [0]*30
+    leftReadings = [0]*15
+    middleReadings = [0]*15
+    rightReadings = [0]*15
     linereading = [0]*3
-    for i in range(0, 30):
+    for i in range(0, 15):
         leftReadings[i] = GPIO.input(lSensor)
         middleReadings[i] = GPIO.input(mSensor)
         rightReadings[i] = GPIO.input(rSensor)
     # linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
     # print(linereading)
-    if(leftReadings.count(1) > 6):
+    if(leftReadings.count(1) > 3):
         linereading[0] = 1
     else:
         linereading[0] = 0
 
-    if(middleReadings.count(1) > 6):
+    if(middleReadings.count(1) > 3):
         linereading[1] = 1
     else:
         linereading[1] = 0
 
-    if(rightReadings.count(1) > 6):
+    if(rightReadings.count(1) > 3):
         linereading[2] = 1
     else:
         linereading[2] = 0
@@ -65,17 +65,17 @@ def decideSpeed():
     if(sensorval == [1, 1, 1]) or (sensorval == [0, 1, 0]):
         direction = (100, 100)
     elif(sensorval == [1, 1, 0]):
-        direction = (40, 80)
+        direction = (50, 100)
     elif(sensorval == [0, 1, 1]):
-        direction = (80, 40)
+        direction = (100, 50)
     elif(sensorval == [1, 0, 0]):
-        direction = (0, 80)
+        direction = (0, 100)
     elif(sensorval == [0, 0, 1]):
-        direction = (80, 0)
+        direction = (100, 0)
     elif(sensorval == [1, 0, 1]):
         direction = (0, 0)
     elif(sensorval == [0, 0, 0]):
-        direction = (-50, -50)
+        direction = (-60, -60)
     # print(direction)
     runMotor(direction)
 
