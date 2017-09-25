@@ -66,10 +66,8 @@ def decideSpeed():
         direction = (100, 100)
     elif(sensorval == [1, 1, 0]):
         direction = (50, 100)
-        time.sleep(0.2)
     elif(sensorval == [0, 1, 1]):
         direction = (100, 50)
-        time.sleep(0.2)
     elif(sensorval == [1, 0, 0]):
         direction = (0, 100)
     elif(sensorval == [0, 0, 1]):
