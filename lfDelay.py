@@ -27,10 +27,10 @@ rMotor = GPIO.PWM(rMotorPWM, 100)  # Right motor PWM init @ 100Hz
 lMotor = GPIO.PWM(lMotorPWM, 100)  # Left motor PWM init @ 100Hz
 
 def getSensors():
-    leftReadings = []
-    middleReadings = []
-    rightReadings = []
-    linereading = []
+    leftReadings = [0]*30
+    middleReadings = [0]*30
+    rightReadings = [0]*30
+    linereading = [0]*3
     for i in range(0, 30):
         leftReadings[i] = GPIO.input(lSensor)
         middleReadings[i] = GPIO.input(mSensor)
