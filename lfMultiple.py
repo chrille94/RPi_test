@@ -23,12 +23,18 @@ gpio_inputs = (rSensor, mSensor, lSensor)
 
 GPIO.setup(gpio_outputs, GPIO.OUT)
 GPIO.setup(gpio_inputs, GPIO.IN)
-rMotor = GPIO.PWM(rMotorPWM, 100)  # Right motor PWM init @ 100Hz
-lMotor = GPIO.PWM(lMotorPWM, 100)  # Left motor PWM init @ 100Hz
+rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 100Hz
+lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 100Hz
 
 def getSensors():
     linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
     # print(linereading)
+
+    # print(leftReadings.count(1))
+    # print(middleReadings.count(1))
+    # print(rightReadings.count(1))
+    # print(linereading)
+
     return linereading
 
 def decideSpeed():
@@ -37,17 +43,17 @@ def decideSpeed():
     if(sensorval == [1, 1, 1]) or (sensorval == [0, 1, 0]):
         direction = (100, 100)
     elif(sensorval == [1, 1, 0]):
-        direction = (40, 80)
+        direction = (50, 100)
     elif(sensorval == [0, 1, 1]):
-        direction = (80, 40)
+        direction = (100, 50)
     elif(sensorval == [1, 0, 0]):
-        direction = (-70, 70)
+        direction = (0, 100)
     elif(sensorval == [0, 0, 1]):
-        direction = (70, -70)
+        direction = (100, 0)
     elif(sensorval == [1, 0, 1]):
         direction = (0, 0)
     elif(sensorval == [0, 0, 0]):
-        direction = (-50, -50)
+        direction = (-60, -60)
     # print(direction)
     runMotor(direction)
 
@@ -78,21 +84,12 @@ def runMotor(values):
         GPIO.output(rMotorF, 0)
         GPIO.output(rMotorR, 1)
 
-
+def cleanupGpio():
+    GPIO.cleanup()
 
 while 1:
-    decideSpeed()
-    # time.sleep(1)
-    # options[linereading]()
-    # if (linereading == [0, 0, 0] or [1, 1, 1] or [0, 1, 0]):
-    #     forward()
-    # elif (linereading == [0, 1, 1]):        # Left sensor: white. Others: black
-    #     softRight()
-    # elif (linereading == [1, 1, 0]):        # Right sensor: white. Others: black
-    #     softLeft()
-    # elif (linereading == [0, 0, 1])         # Right sensor: black. Others: white
-    #     hardRight()
-    # elif (linereading == [1, 0, 0]):        # Left sensor: black. Others: white
-    #     hardLeft()
-    # elif (linereading == [1, 0, 1]):        # Middle sensor white. Others: black
-    #     stop()
+    try:
+        decideSpeed()
+    except KeyboardInterrupt:
+        print "cleanup"
+        cleanupGpio()
