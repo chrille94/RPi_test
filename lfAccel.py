@@ -92,7 +92,7 @@ def decideSpeed():
     # runMotor(direction)
     accelerate(direction)
 
-def accelerate(speeds)
+def accelerate(speeds):
     newSpeeds = [0]*2
     if(speeds[0] == prevSpeeds.lastL):
         newSpeeds[0] = prevSpeeds.lastL
@@ -112,7 +112,7 @@ def accelerate(speeds)
     prevSpeeds.lastR = newSpeeds[1]
 
     runMotor(newSpeeds)
-        
+
 
 def runMotor(values):
     if(values[0] == 0):
