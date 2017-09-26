@@ -110,7 +110,7 @@ def accelerate(speeds):
 
     prevSpeeds.lastL = newSpeeds[0]
     prevSpeeds.lastR = newSpeeds[1]
-
+    time.sleep(0.001)
     runMotor(newSpeeds)
 
 
