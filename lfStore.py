@@ -80,7 +80,7 @@ def decideSpeed():
     elif(sensorval == [1, 0, 1]):
         direction = (0, 0)
     elif(sensorval == [0, 0, 0]):
-        if saveDirection.lastDir = 0:
+        if saveDirection.lastDir == 0:
             direction = (-100, 100)
         else:
             direction = (100, -100)
