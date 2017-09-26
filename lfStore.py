@@ -73,17 +73,17 @@ def decideSpeed():
         direction = (100, 50)
     elif(sensorval == [1, 0, 0]):
         saveDirection.lastDir = 0
-        direction = (0, 100)
+        direction = (0, 90)
     elif(sensorval == [0, 0, 1]):
         saveDirection.lastDir = 1
-        direction = (100, 0)
+        direction = (90, 0)
     elif(sensorval == [1, 0, 1]):
         direction = (0, 0)
     elif(sensorval == [0, 0, 0]):
         if saveDirection.lastDir == 0:
-            direction = (-100, 100)
+            direction = (-90, 90)
         else:
-            direction = (100, -100)
+            direction = (90, -90)
     # print(direction)
     runMotor(direction)
 
