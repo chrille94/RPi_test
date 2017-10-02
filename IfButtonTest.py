@@ -17,10 +17,12 @@ lSensor = 24
 button1 = 16
 button2 = 20
 button3 = 21
+sign1 = 19
+sign5 = 26
 
 GPIO.setmode(GPIO.BCM)
 
-gpio_outputs = (rMotorPWM, rMotorF, rMotorR, lMotorPWM, lMotorF, lMotorR)
+gpio_outputs = (rMotorPWM, rMotorF, rMotorR, lMotorPWM, lMotorF, lMotorR, sign1, sign5)
 
 gpio_inputs = (rSensor, mSensor, lSensor, button1, button2, button3)
 
@@ -38,6 +40,10 @@ class savePress:
     
 class startFlag:
     started = 0
+
+def setSign(numbersToShow):
+    GPIO.output(sign1, numbersToShow[0])
+    GPIO.output(sign5, numbersToShow[1])
 
 def readButtons():
     startButton = GPIO.input(button1)
@@ -159,11 +165,13 @@ def cleanupGpio():
 try:
     while 1:
         readButtons()
-	print(startFlag.started)
+        # print(startFlag.started)
         if(startFlag.started):
             decideSpeed()
-	else:
-	    runMotor((0, 0))
+            setSign((1, 0))
+        else:
+            runMotor((0, 0))
+            setSign((0, 1))
 except KeyboardInterrupt:
     print "cleanup"
     cleanupGpio()
