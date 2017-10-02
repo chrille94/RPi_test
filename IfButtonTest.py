@@ -35,7 +35,7 @@ class saveDirection:
 class savePress:
     prev_input = 0
     
-class startFlag
+class startFlag:
     started = 0
 
 def Buttonpress():
