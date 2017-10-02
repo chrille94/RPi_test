@@ -33,20 +33,25 @@ class saveDirection:
     lastDir = 0 # "static" variable accessed through class
     
 class savePress:
-    prev_input = 0
+    prev_input1 = 0
+    prev_input2 = 0
     
 class startFlag:
     started = 0
 
-def Buttonpress():
-    input = GPIO.input(button1)
-    #if the last reading was low and this one high, print
-    if ((savePress.prev_input) and not input):
+def readButtons():
+    startbutton = GPIO.input(button1)
+    stopButton = GPIO.input(button3)
+    if ((savePress.prev_input1) and not startButton):
         print("Button pressed")
         startFlag.started = 1
-    #update previous input
-    savePress.prev_input = input
-    #slight pause to debounce
+    if ((savePress.prev_input2) and not stopButton):
+        print("Button pressed")
+        startFlag.started = 0
+        
+    savePress.prev_input1 = startButton
+    savePress.prev_input2 = stopButton
+    
     time.sleep(0.05)
     
     #readbutton1 = GPIO.input(button1)
@@ -153,7 +158,7 @@ def cleanupGpio():
 
 try:
     while 1:
-        Buttonpress()
+        readButtons()
         if(startFlag.started):
             decideSpeed()
 except KeyboardInterrupt:
