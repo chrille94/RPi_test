@@ -43,16 +43,16 @@ def readButtons():
     startButton = GPIO.input(button1)
     stopButton = GPIO.input(button3)
     if ((savePress.prev_input1) and not startButton):
-        print("Button pressed")
+        print("start pressed")
         startFlag.started = 1
     if ((savePress.prev_input2) and not stopButton):
-        print("Button pressed")
+        print("Stop pressed")
         startFlag.started = 0
         
     savePress.prev_input1 = startButton
     savePress.prev_input2 = stopButton
     
-    time.sleep(0.05)
+    # time.sleep(0.05)
     
     #readbutton1 = GPIO.input(button1)
 
@@ -159,8 +159,11 @@ def cleanupGpio():
 try:
     while 1:
         readButtons()
+	print(startFlag.started)
         if(startFlag.started):
             decideSpeed()
+	else:
+	    runMotor((0, 0))
 except KeyboardInterrupt:
     print "cleanup"
     cleanupGpio()
