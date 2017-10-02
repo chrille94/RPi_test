@@ -28,8 +28,8 @@ gpio_inputs = (rSensor, mSensor, lSensor, button1, button2, button3)
 
 GPIO.setup(gpio_outputs, GPIO.OUT)
 GPIO.setup(gpio_inputs, GPIO.IN)
-rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 100Hz
-lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 100Hz
+rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 200Hz
+lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 200Hz
 
 class saveDirection:
     lastDir = 0 # "static" variable accessed through class
@@ -57,22 +57,7 @@ def readButtons():
         
     savePress.prev_input1 = startButton
     savePress.prev_input2 = stopButton
-    
-    # time.sleep(0.05)
-    
-    #readbutton1 = GPIO.input(button1)
 
-    # while(True)
-    #if(readbutton1 == 1):
-     #   press1 = 1 
-     #   print("press = 1")
-    #elif(readbutton1 == 1 and press1 == 1):
-     #   press1 = 0
-      #  print("press = 0")
-          
-            
-         
-            
 
 def getSensors():
     leftReadings = [0]*15
@@ -168,10 +153,10 @@ try:
         # print(startFlag.started)
         if(startFlag.started):
             decideSpeed()
-            setSign((1, 0))
+            # setSign((1, 0))
         else:
             runMotor((0, 0))
-            setSign((0, 1))
+            # setSign((0, 1))
 except KeyboardInterrupt:
     print "cleanup"
     cleanupGpio()
