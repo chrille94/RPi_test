@@ -33,16 +33,26 @@ class saveDirection:
     lastDir = 0 # "static" variable accessed through class
 
 def Buttonpress():
+    prev_input = 0
+    while True:
+    input = GPIO.input(button1)
+    #if the last reading was low and this one high, print
+    if ((not prev_input) and input):
+        print("Button pressed")
+    #update previous input
+    prev_input = input
+    #slight pause to debounce
+    time.sleep(0.05)
     
-    readbutton1 = GPIO.input(button1)
+    #readbutton1 = GPIO.input(button1)
 
     # while(True)
-    if(readbutton1 == 1):
-        press1 = 1 
-        print("press = 1")
-    elif(readbutton1 == 1 and press1 == 1):
-        press1 = 0
-        print("press = 0")
+    #if(readbutton1 == 1):
+     #   press1 = 1 
+     #   print("press = 1")
+    #elif(readbutton1 == 1 and press1 == 1):
+     #   press1 = 0
+      #  print("press = 0")
           
             
          
