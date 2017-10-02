@@ -37,12 +37,12 @@ def Buttonpress():
     readbutton1 = GPIO.input(button1)
 
     # while(True)
-        if readbutton1 == 1
-            press1 = 1 
-            print("press = 1")
-        elif readbutton1 == 1 and press1 == 1
-            press1 = 0
-            print("press = 0")
+    if readbutton1 == 1
+        press1 = 1 
+        print("press = 1")
+    elif readbutton1 == 1 and press1 == 1
+        press1 = 0
+        print("press = 0")
           
             
          
