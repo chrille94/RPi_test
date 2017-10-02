@@ -18,6 +18,8 @@ button1 = 16
 button2 = 20
 button3 = 21
 
+started = 0
+
 GPIO.setmode(GPIO.BCM)
 
 gpio_outputs = (rMotorPWM, rMotorF, rMotorR, lMotorPWM, lMotorF, lMotorR)
@@ -39,7 +41,8 @@ def Buttonpress():
     input = GPIO.input(button1)
     #if the last reading was low and this one high, print
     if ((not savePress.prev_input) and input):
-        print("Button pressed")
+        #print("Button pressed")
+        global started = 0
     #update previous input
     savePress.prev_input = input
     #slight pause to debounce
@@ -147,10 +150,12 @@ def runMotor(values):
 def cleanupGpio():
     GPIO.cleanup()
 
-while 1:
-   # try:
-   #     decideSpeed()
-   # except KeyboardInterrupt:
-   #     print "cleanup"
-   #     cleanupGpio()
-    Buttonpress()
+try:
+    while 1:
+        Buttonpress()
+        if(started):
+            decideSpeed()
+except KeyboardInterrupt:
+    print "cleanup"
+    cleanupGpio()
+    
