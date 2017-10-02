@@ -40,7 +40,7 @@ class startFlag:
     started = 0
 
 def readButtons():
-    startbutton = GPIO.input(button1)
+    startButton = GPIO.input(button1)
     stopButton = GPIO.input(button3)
     if ((savePress.prev_input1) and not startButton):
         print("Button pressed")
