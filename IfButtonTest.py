@@ -41,7 +41,7 @@ class startFlag:
 def Buttonpress():
     input = GPIO.input(button1)
     #if the last reading was low and this one high, print
-    if ((not savePress.prev_input) and input):
+    if ((savePress.prev_input) and not input):
         print("Button pressed")
         startFlag.started = 1
     #update previous input
