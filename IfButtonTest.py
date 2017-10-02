@@ -37,10 +37,10 @@ class saveDirection:
 def Buttonpress():
     input = GPIO.input(button1)
     #if the last reading was low and this one high, print
-    if ((not prev_input) and input):
+    if ((not global prev_input) and input):
         print("Button pressed")
     #update previous input
-    prev_input = input
+    global prev_input = input
     #slight pause to debounce
     time.sleep(0.05)
     
