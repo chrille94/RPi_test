@@ -18,8 +18,6 @@ button1 = 16
 button2 = 20
 button3 = 21
 
-prev_input = 0
-
 GPIO.setmode(GPIO.BCM)
 
 gpio_outputs = (rMotorPWM, rMotorF, rMotorR, lMotorPWM, lMotorF, lMotorR)
@@ -31,11 +29,12 @@ GPIO.setup(gpio_inputs, GPIO.IN)
 rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 100Hz
 lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 100Hz
 
+prev_input = 0
+
 class saveDirection:
     lastDir = 0 # "static" variable accessed through class
 
 def Buttonpress():
-    
     input = GPIO.input(button1)
     #if the last reading was low and this one high, print
     if ((not prev_input) and input):
