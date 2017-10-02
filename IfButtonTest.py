@@ -32,11 +32,11 @@ lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 100Hz
 class saveDirection:
     lastDir = 0 # "static" variable accessed through class
 
-def Buttonpress()
+def Buttonpress():
     
     readbutton1 = GPIO.input(button1)
 
-    while(True)
+    # while(True)
         if readbutton1 == 1
             press1 = 1 
             print("press = 1")
@@ -137,8 +137,9 @@ def cleanupGpio():
     GPIO.cleanup()
 
 while 1:
-    try:
-        decideSpeed()
-    except KeyboardInterrupt:
-        print "cleanup"
-        cleanupGpio()
+   # try:
+   #     decideSpeed()
+   # except KeyboardInterrupt:
+   #     print "cleanup"
+   #     cleanupGpio()
+    Buttonpress()
