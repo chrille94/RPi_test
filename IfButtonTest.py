@@ -18,8 +18,6 @@ button1 = 16
 button2 = 20
 button3 = 21
 
-started = 0
-
 GPIO.setmode(GPIO.BCM)
 
 gpio_outputs = (rMotorPWM, rMotorF, rMotorR, lMotorPWM, lMotorF, lMotorR)
@@ -36,6 +34,9 @@ class saveDirection:
     
 class savePress:
     prev_input = 0
+    
+class startFlag
+    started = 0
 
 def Buttonpress():
     input = GPIO.input(button1)
@@ -153,7 +154,7 @@ def cleanupGpio():
 try:
     while 1:
         Buttonpress()
-        if(started):
+        if(startFlag.started):
             decideSpeed()
 except KeyboardInterrupt:
     print "cleanup"
