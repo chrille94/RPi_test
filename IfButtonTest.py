@@ -29,18 +29,19 @@ GPIO.setup(gpio_inputs, GPIO.IN)
 rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 100Hz
 lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 100Hz
 
-prev_input = 0
-
 class saveDirection:
     lastDir = 0 # "static" variable accessed through class
+    
+class savePress:
+    prev_input = 0
 
 def Buttonpress():
     input = GPIO.input(button1)
     #if the last reading was low and this one high, print
-    if ((not global prev_input) and input):
+    if ((not savePress.prev_input) and input):
         print("Button pressed")
     #update previous input
-    global prev_input = input
+    savePress.prev_input = input
     #slight pause to debounce
     time.sleep(0.05)
     
