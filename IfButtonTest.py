@@ -43,7 +43,7 @@ def Buttonpress():
     #if the last reading was low and this one high, print
     if ((not savePress.prev_input) and input):
         #print("Button pressed")
-        global started = 0
+        startFlag.started = 0
     #update previous input
     savePress.prev_input = input
     #slight pause to debounce
