@@ -156,7 +156,7 @@ def runMotor(values):
 def cleanupGpio():
     GPIO.cleanup()
 
-def blinkSign
+def blinkSign:
     setSign((0, 1))
     time.sleep(0.3)
     setSign((0, 0))
