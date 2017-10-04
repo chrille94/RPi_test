@@ -51,11 +51,11 @@ class blinkSign(threading.Thread):
         self.start()
     def run(self):
         while 1:
-            GPIO.output(19, 1)
-            GPIO.output(26, 1)
+            GPIO.output(sign1, 1)
+            GPIO.output(sign5, 1)
             time.sleep(0.2)
-            GPIO.output(19, 0)
-            GPIO.output(26, 0)
+            GPIO.output(sign1, 0)
+            GPIO.output(sign5, 0)
             time.sleep(0.2)
 
 def setSign(numbersToShow):
