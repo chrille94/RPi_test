@@ -36,32 +36,32 @@ class runRobot(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.sensorval = []*3
-        self.direction = ()
+        self.direction = []*2
         self.leftReadings = [0] * 15
         self.middleReadings = [0] * 15
         self.rightReadings = [0] * 15
         self.linereading = [0] * 3
-        self.values = (0, 0)
+        self.values = []*2
         self.start()
     def run(self):
         self.sensorval = self.getSensors()
         # print(self.sensorval)
         if (self.sensorval == [1, 1, 1]) or (self.sensorval == [0, 1, 0]):
-            self.direction = (100, 100)
+            self.direction = [100, 100]
         elif (self.sensorval == [1, 1, 0]):
-            self.direction = (50, 100)
+            self.direction = [50, 100]
         elif (self.sensorval == [0, 1, 1]):
-            self.direction = (100, 50)
+            self.direction = [100, 50]
         elif (self.sensorval == [1, 0, 0]):
             #saveself.Direction.lastDir = 0
-            self.direction = (0, 90)
+            self.direction = [0, 90]
         elif (self.sensorval == [0, 0, 1]):
             #saveself.Direction.lastDir = 1
-            self.direction = (90, 0)
+            self.direction = [90, 0]
         elif (self.sensorval == [1, 0, 1]):
-            self.direction = (0, 0)
+            self.direction = [0, 0]
         elif (self.sensorval == [0, 0, 0]):
-            self.direction = (-50, -50)
+            self.direction = [-50, -50]
             #if saveself.Direction.lastDir == 0:
             #   self.direction = (-90, 90)
             #else:
