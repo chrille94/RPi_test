@@ -41,7 +41,7 @@ class runRobot(threading.Thread):
         self.middleReadings = [0] * 15
         self.rightReadings = [0] * 15
         self.linereading = [0] * 3
-        self.values = ()
+        self.values = (0, 0)
     def run(self):
         self.sensorval = self.getSensors()
         # print(self.sensorval)
