@@ -164,14 +164,4 @@ def blinkSign():
 
 mainThread = runRobot()
 mainThread.start()
-try:
-    while 1:
 
-            # decideSpeed()
-            # setSign((1, 0))
-        #else:
-            #runMotor((0, 0))
-            # setSign((0, 1))
-except KeyboardInterrupt:
-    print("cleanup")
-    cleanupGpio()
