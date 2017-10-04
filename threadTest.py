@@ -34,6 +34,7 @@ lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 200Hz
 
 class runRobot(threading.Thread):
     def __init__(self):
+        threading.Thread.__init__(self)
         self.sensorval = []*3
         self.direction = ()
         self.leftReadings = [0] * 15
@@ -125,14 +126,9 @@ class runRobot(threading.Thread):
             GPIO.output(rMotorR, 1)
 
 
-
 def setSign(numbersToShow):
     GPIO.output(sign1, numbersToShow[0])
     GPIO.output(sign5, numbersToShow[1])
-
-
-
-
 
 def cleanupGpio():
     GPIO.cleanup()
@@ -177,6 +173,5 @@ try:
             #runMotor((0, 0))
             # setSign((0, 1))
 except KeyboardInterrupt:
-    print
-    "cleanup"
+    print("cleanup")
     cleanupGpio()
