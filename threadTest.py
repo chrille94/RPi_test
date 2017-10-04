@@ -42,6 +42,7 @@ class runRobot(threading.Thread):
         self.rightReadings = [0] * 15
         self.linereading = [0] * 3
         self.values = (0, 0)
+        self.start()
     def run(self):
         self.sensorval = self.getSensors()
         # print(self.sensorval)
@@ -162,6 +163,13 @@ def blinkSign():
 #blinkthread = threading.Thread(target=blinkSign())
 #blinkthread.start()
 
-mainThread = runRobot()
-mainThread.start()
+runRobot()
+
+try:
+    while 1:
+        pass
+
+except KeyboardInterrupt:
+    print("cleanup")
+    cleanupGpio()
 
