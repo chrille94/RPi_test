@@ -31,7 +31,8 @@ GPIO.setup(gpio_outputs, GPIO.OUT)
 GPIO.setup(gpio_inputs, GPIO.IN)
 rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 200Hz
 lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 200Hz
-
+one = GPIO.PWM(sign1, 400)
+five = GPIO.PWM(sign5, 400)
 
 class saveDirection:
     lastDir = 0  # "static" variable accessed through class
@@ -50,13 +51,16 @@ class blinkSign(threading.Thread):
         threading.Thread.__init__(self)
         self.start()
     def run(self):
+        one.start(0)
+        five.start(0)
         while 1:
-            GPIO.output(sign1, 1)
-            GPIO.output(sign5, 1)
-            time.sleep(0.2)
-            GPIO.output(sign1, 0)
-            GPIO.output(sign5, 0)
-            time.sleep(0.2)
+            for i in range(0, 100, 1):
+                one.ChangeDutyCycle(i)
+                time.sleep(0.01)
+
+            for j in range(100, 0, -1):
+                one.ChangeDutyCycle(j)
+                time.sleep(0.01)
 
 def setSign(numbersToShow):
     GPIO.output(sign1, numbersToShow[0])
