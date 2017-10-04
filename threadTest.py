@@ -163,10 +163,10 @@ def blinkSign():
 #blinkthread.start()
 
 mainThread = runRobot()
-
+mainThread.start()
 try:
     while 1:
-        mainThread.start()
+
             # decideSpeed()
             # setSign((1, 0))
         #else:
