@@ -172,9 +172,10 @@ def runMotor(values):
 def cleanupGpio():
     GPIO.cleanup()
 
-blinkSign()
+# blinkSign()
 
 try:
+    blinkSign()
     while 1:
         readButtons()
         # print(startFlag.started)
