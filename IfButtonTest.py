@@ -30,6 +30,8 @@ GPIO.setup(gpio_outputs, GPIO.OUT)
 GPIO.setup(gpio_inputs, GPIO.IN)
 rMotor = GPIO.PWM(rMotorPWM, 200)  # Right motor PWM init @ 200Hz
 lMotor = GPIO.PWM(lMotorPWM, 200)  # Left motor PWM init @ 200Hz
+oneSign = GPIO.PWM(sign1, 400)
+fiveSign = GPIO.PWM(sign5, 400)
 
 class saveDirection:
     lastDir = 0 # "static" variable accessed through class
@@ -148,6 +150,8 @@ def cleanupGpio():
     GPIO.cleanup()
 
 try:
+    oneSign.start(20)
+    fiveSign.start(20)
     while 1:
         readButtons()
         # print(startFlag.started)
@@ -158,6 +162,5 @@ try:
             runMotor((0, 0))
             # setSign((0, 1))
 except KeyboardInterrupt:
-    print "cleanup"
+    print("cleanup")
     cleanupGpio()
-    
