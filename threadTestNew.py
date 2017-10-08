@@ -45,6 +45,7 @@ class savePress:
 class startFlag:
     started = 0
 
+
 class blinkSign(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -158,22 +159,15 @@ def runMotor(values):
         GPIO.output(rMotorR, 1)
 
 
-def cleanupGpio():
-    GPIO.cleanup()
-
-
 try:
     blinkSign()
     while 1:
         readButtons()
-        # print(startFlag.started)
         if (startFlag.started):
             decideSpeed()
-            # setSign((1, 0))
         else:
             runMotor((0, 0))
-            # setSign((0, 1))
 except KeyboardInterrupt:
     print("cleanup")
-    cleanupGpio()
+    GPIO.cleanup()
 
