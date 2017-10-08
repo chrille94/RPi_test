@@ -25,10 +25,12 @@ try:
     while 1:
         for i in range(0, 100, 1):
             oneSign.ChangeDutyCycle(i)
+            fiveSign.ChangeDutyCycle(i)
             time.sleep(0.01)
 
         for j in range(100, 0, -1):
             oneSign.ChangeDutyCycle(j)
+            fiveSign.ChangeDutyCycle(j)
             time.sleep(0.01)
 
 except KeyboardInterrupt:
