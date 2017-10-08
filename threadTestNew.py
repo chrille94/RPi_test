@@ -5,7 +5,6 @@ import RPi.GPIO as GPIO
 import time
 import threading
 
-# GPIO pin defs
 rMotorPWM = 4
 rMotorF = 3
 rMotorR = 2
@@ -55,17 +54,15 @@ class blinkSign(threading.Thread):
         oneSign.start(0)
         fiveSign.start(0)
         while 1:
-            for i in range(0, 100, 1):
+            for i in range(20, 100, 1):
                 oneSign.ChangeDutyCycle(i)
+                fiveSign.ChangeDutyCycle(i)
                 time.sleep(0.01)
 
-            for j in range(100, 0, -1):
+            for j in range(100, 20, -1):
                 oneSign.ChangeDutyCycle(j)
+                fiveSign.ChangeDutyCycle(j)
                 time.sleep(0.01)
-
-def setSign(numbersToShow):
-    GPIO.output(sign1, numbersToShow[0])
-    GPIO.output(sign5, numbersToShow[1])
 
 
 def readButtons():
@@ -91,8 +88,6 @@ def getSensors():
         leftReadings[i] = GPIO.input(lSensor)
         middleReadings[i] = GPIO.input(mSensor)
         rightReadings[i] = GPIO.input(rSensor)
-    # linereading = [GPIO.input(lSensor), GPIO.input(mSensor), GPIO.input(rSensor)]
-    # print(linereading)
     if (leftReadings.count(1) > 3):
         linereading[0] = 1
     else:
@@ -107,11 +102,6 @@ def getSensors():
         linereading[2] = 1
     else:
         linereading[2] = 0
-
-    # print(leftReadings.count(1))
-    # print(middleReadings.count(1))
-    # print(rightReadings.count(1))
-    # print(linereading)
 
     return linereading
 
@@ -152,8 +142,6 @@ def runMotor(values):
         rMotor.stop()
     else:
         rMotor.start(abs(values[1]))
-    # print(abs(values[0]))
-    # print(abs(values[1]))
 
     if (values[0] >= 0):
         GPIO.output(lMotorR, 0)
@@ -173,7 +161,6 @@ def runMotor(values):
 def cleanupGpio():
     GPIO.cleanup()
 
-# blinkSign()
 
 try:
     blinkSign()
