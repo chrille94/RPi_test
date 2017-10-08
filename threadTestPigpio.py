@@ -22,12 +22,22 @@ button3 = 21
 sign1 = 19
 sign5 = 26
 
-gpio_outputs = (rMotorPWM, rMotorF, rMotorR, lMotorPWM, lMotorF, lMotorR, sign1, sign5)
+gpio.set_mode(rMotorPWM, pigpio.OUTPUT)
+gpio.set_mode(rMotorF, pigpio.OUTPUT)
+gpio.set_mode(rMotorR, pigpio.OUTPUT)
+gpio.set_mode(lMotorPWM, pigpio.OUTPUT)
+gpio.set_mode(lMotorF, pigpio.OUTPUT)
+gpio.set_mode(lMotorR, pigpio.OUTPUT)
+gpio.set_mode(sign1, pigpio.OUTPUT)
+gpio.set_mode(sign5, pigpio.OUTPUT)
 
-gpio_inputs = (rSensor, mSensor, lSensor, button1, button2, button3)
+gpio.set_mode(rSensor, pigpio.INPUT)
+gpio.set_mode(mSensor, pigpio.INPUT)
+gpio.set_mode(lSensor, pigpio.INPUT)
+gpio.set_mode(button1, pigpio.INPUT)
+gpio.set_mode(button2, pigpio.INPUT)
+gpio.set_mode(button3, pigpio.INPUT)
 
-gpio.set_mode(gpio_outputs, pigpio.OUTPUT)
-gpio.set_mode(gpio_inputs, pigpio.INPUT)
 gpio.set_PWM_frequency(rMotorPWM, 200)  # Right motor PWM init @ 200Hz
 gpio.set_PWM_frequency(lMotorPWM, 200)  # Left motor PWM init @ 200Hz
 gpio.set_PWM_frequency(sign1, 400)
