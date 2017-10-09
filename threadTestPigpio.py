@@ -38,8 +38,8 @@ gpio.set_mode(button1, pigpio.INPUT)
 gpio.set_mode(button2, pigpio.INPUT)
 gpio.set_mode(button3, pigpio.INPUT)
 
-gpio.set_PWM_frequency(rMotorPWM, 200)  # Right motor PWM init @ 200Hz
-gpio.set_PWM_frequency(lMotorPWM, 200)  # Left motor PWM init @ 200Hz
+gpio.set_PWM_frequency(rMotorPWM, 60)  # Right motor PWM init @ 200Hz
+gpio.set_PWM_frequency(lMotorPWM, 60)  # Left motor PWM init @ 200Hz
 gpio.set_PWM_frequency(sign1, 400)
 gpio.set_PWM_frequency(sign5, 400)
 
@@ -63,12 +63,12 @@ class blinkSign(threading.Thread):
         self.start()
     def run(self):
         while 1:
-            for i in range(30, 255, 5):
+            for i in range(20, 255, 5):
                 gpio.set_PWM_dutycycle(sign1, i)
                 gpio.set_PWM_dutycycle(sign5, i)
                 time.sleep(0.02)
 
-            for j in range(255, 30, -5):
+            for j in range(255, 20, -5):
                 gpio.set_PWM_dutycycle(sign1, j)
                 gpio.set_PWM_dutycycle(sign5, j)
                 time.sleep(0.02)
@@ -159,6 +159,15 @@ def runMotor(values):
         gpio.write(rMotorF, 0)
         gpio.write(rMotorR, 1)
 
+def resetGpio():
+    gpio.write(lMotorF, 0)
+    gpio.write(lMotorR, 0)
+    gpio.write(rMotorR, 0)
+    gpio.write(rMotorF, 0)
+    gpio.write(sign1, 0)
+    gpio.write(sign5, 0)
+    gpio.write(rMotorPWM, 0)
+    gpio.write(lMotorPWM, 0)
 
 try:
     blinkSign()
@@ -170,5 +179,6 @@ try:
             runMotor((0, 0))
 except KeyboardInterrupt:
     print("cleanup")
+    resetGpio()
     gpio.stop()
 
