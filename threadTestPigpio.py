@@ -67,7 +67,7 @@ class blinkSign(threading.Thread):
         while 1:
             for i in range(0, len(sequence), 1):
                 gpio.write(sign1, sequence[i][0])
-                gpio.write(sign1, sequence[i][1])
+                gpio.write(sign5, sequence[i][1])
                 time.sleep(0.25)
             # for i in range(20, 255, 5):
             #     gpio.set_PWM_dutycycle(sign1, i)
