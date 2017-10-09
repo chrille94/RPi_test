@@ -78,10 +78,10 @@ def readButtons():
     startButton = gpio.read(button1)
     stopButton = gpio.read(button3)
     if ((savePress.prev_input1) and not startButton):
-        print("start pressed")
+        # print("start pressed")
         startFlag.started = 1
     if ((savePress.prev_input2) and not stopButton):
-        print("Stop pressed")
+        # print("Stop pressed")
         startFlag.started = 0
 
     savePress.prev_input1 = startButton
