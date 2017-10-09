@@ -9,6 +9,8 @@ sequence = ((0,1),(1,0),(0,1),(1,0),(0,1),(1,0),(0,0),(1,1),(0,0),(1,1),(0,0),(1
 
 gpio = pigpio.pi()
 
+eventFlag = threading.Event()
+
 rMotorPWM = 4
 rMotorF = 3
 rMotorR = 2
@@ -65,19 +67,21 @@ class blinkSign(threading.Thread):
         self.start()
     def run(self):
         while 1:
-            for i in range(0, len(sequence), 1):
-                gpio.write(sign1, sequence[i][0])
-                gpio.write(sign5, sequence[i][1])
-                time.sleep(0.17)
-            # for i in range(20, 255, 5):
-            #     gpio.set_PWM_dutycycle(sign1, i)
-            #     gpio.set_PWM_dutycycle(sign5, i)
-            #     time.sleep(0.02)
-            #
-            # for j in range(255, 20, -5):
-            #     gpio.set_PWM_dutycycle(sign1, j)
-            #     gpio.set_PWM_dutycycle(sign5, j)
-            #     time.sleep(0.02)
+            if(eventFlag.isSet):
+                for i in range(0, len(sequence), 1):
+                    gpio.write(sign1, sequence[i][0])
+                    gpio.write(sign5, sequence[i][1])
+                    time.sleep(0.1)
+            else:
+                for i in range(20, 255, 5):
+                    gpio.set_PWM_dutycycle(sign1, i)
+                    gpio.set_PWM_dutycycle(sign5, i)
+                    time.sleep(0.02)
+
+                for j in range(255, 20, -5):
+                    gpio.set_PWM_dutycycle(sign1, j)
+                    gpio.set_PWM_dutycycle(sign5, j)
+                    time.sleep(0.02)
 
 
 def readButtons():
@@ -86,9 +90,11 @@ def readButtons():
     if ((savePress.prev_input1) and not startButton):
         # print("start pressed")
         startFlag.started = 1
+        eventFlag.set()
     if ((savePress.prev_input2) and not stopButton):
         # print("Stop pressed")
         startFlag.started = 0
+
 
     savePress.prev_input1 = startButton
     savePress.prev_input2 = stopButton
