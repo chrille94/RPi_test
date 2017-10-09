@@ -66,12 +66,12 @@ class blinkSign(threading.Thread):
             for i in range(30, 255, 5):
                 gpio.set_PWM_dutycycle(sign1, i)
                 gpio.set_PWM_dutycycle(sign5, i)
-                time.sleep(0.01)
+                time.sleep(0.02)
 
             for j in range(255, 30, -5):
                 gpio.set_PWM_dutycycle(sign1, j)
                 gpio.set_PWM_dutycycle(sign5, j)
-                time.sleep(0.01)
+                time.sleep(0.02)
 
 
 def readButtons():
@@ -119,24 +119,24 @@ def decideSpeed():
     sensorval = getSensors()
     # print(sensorval)
     if (sensorval == [1, 1, 1]) or (sensorval == [0, 1, 0]):
-        direction = (100, 100)
+        direction = (255, 255)
     elif (sensorval == [1, 1, 0]):
-        direction = (50, 100)
+        direction = (127, 255)
     elif (sensorval == [0, 1, 1]):
-        direction = (100, 50)
+        direction = (255, 127)
     elif (sensorval == [1, 0, 0]):
         saveDirection.lastDir = 0
-        direction = (0, 90)
+        direction = (0, 230)
     elif (sensorval == [0, 0, 1]):
         saveDirection.lastDir = 1
-        direction = (90, 0)
+        direction = (230, 0)
     elif (sensorval == [1, 0, 1]):
         direction = (0, 0)
     elif (sensorval == [0, 0, 0]):
         if saveDirection.lastDir == 0:
-            direction = (-90, 90)
+            direction = (-230, 230)
         else:
-            direction = (90, -90)
+            direction = (230, -230)
     # print(direction)
     runMotor(direction)
 
