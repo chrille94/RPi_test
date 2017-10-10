@@ -67,22 +67,22 @@ class blinkSign(threading.Thread):
         self.start()
     def run(self):
         while 1:
-            if(eventFlag.isSet):
-                for i in range(0, len(sequence), 1):
-                    gpio.write(sign1, sequence[i][0])
-                    gpio.write(sign5, sequence[i][1])
-                    time.sleep(0.17)
-            else:
-                eventFlag.wait()
-                for i in range(20, 255, 5):
-                    gpio.set_PWM_dutycycle(sign1, i)
-                    gpio.set_PWM_dutycycle(sign5, i)
-                    time.sleep(0.02)
+            # if(eventFlag.isSet):
+            #     for i in range(0, len(sequence), 1):
+            #         gpio.write(sign1, sequence[i][0])
+            #         gpio.write(sign5, sequence[i][1])
+            #         time.sleep(0.17)
+            # else:
+            #     eventFlag.wait()
+            for i in range(20, 255, 5):
+                gpio.set_PWM_dutycycle(sign1, i)
+                gpio.set_PWM_dutycycle(sign5, i)
+                time.sleep(0.02)
 
-                for j in range(255, 20, -5):
-                    gpio.set_PWM_dutycycle(sign1, j)
-                    gpio.set_PWM_dutycycle(sign5, j)
-                    time.sleep(0.02)
+            for j in range(255, 20, -5):
+                gpio.set_PWM_dutycycle(sign1, j)
+                gpio.set_PWM_dutycycle(sign5, j)
+                time.sleep(0.02)
 
 
 def readButtons():
