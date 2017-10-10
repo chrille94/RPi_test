@@ -42,8 +42,8 @@ gpio.set_mode(button1, pigpio.INPUT)
 gpio.set_mode(button2, pigpio.INPUT)
 gpio.set_mode(button3, pigpio.INPUT)
 
-gpio.set_PWM_frequency(rMotorPWM, 60)  # Right motor PWM init @ 200Hz
-gpio.set_PWM_frequency(lMotorPWM, 60)  # Left motor PWM init @ 200Hz
+gpio.set_PWM_frequency(rMotorPWM, 1000)  # Right motor PWM init @ 200Hz
+gpio.set_PWM_frequency(lMotorPWM, 1000)  # Left motor PWM init @ 200Hz
 gpio.set_PWM_frequency(sign1, 400)
 gpio.set_PWM_frequency(sign5, 400)
 
